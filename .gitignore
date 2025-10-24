@@ -18,3 +18,4 @@ build/
 
 # Ignore large binary that caused push error
 minikube-linux-amd64
+minikube-linux-amd64
