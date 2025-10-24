@@ -32,8 +32,12 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/wisecow:latest
         
-    - name: Deploy to Kubernetes (if kubectl configured)
+    - name: Deploy to Kubernetes (if configured and available)
       run: |
-        kubectl apply -f wisecow-deployment.yaml
-        kubectl apply -f wisecow-service.yaml
-        kubectl apply -f wisecow-ingress.yaml
+        if kubectl version --client >/dev/null 2>&1 && kubectl cluster-info >/dev/null 2>&1; then
+          kubectl apply -f wisecow-deployment.yaml
+          kubectl apply -f wisecow-service.yaml
+          kubectl apply -f wisecow-ingress.yaml
+        else
+          echo "Skipping deploy: Kubernetes cluster not configured in this environment."
+        fi
