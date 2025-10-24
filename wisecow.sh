@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+export PATH=/usr/games:/usr/local/games:$PATH
+
 SRVPORT=4499
 RSPFILE=response
 
